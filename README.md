@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Cyber Land
 
-## Getting Started
+Production-ready Next.js 15 storefront for **Cyber Land** — laptops, gaming PCs, computer hardware, and tech accessories.
 
-First, run the development server:
+## Stack
+
+- Next.js 15 (App Router) · React 19 · TypeScript (strict)
+- Tailwind CSS v4 · Framer Motion
+- Zustand · TanStack Query · Axios
+- React Hook Form · Zod
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quality gates (must pass before deploy)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run type-check
+npm run lint
+npm run build
+# or all:
+npm run verify
+```
 
-## Learn More
+## Vercel deployment
 
-To learn more about Next.js, take a look at the following resources:
+1. Push this repo to GitHub (include the full `src/` folder).
+2. Import the project in [Vercel](https://vercel.com/new).
+3. Framework preset: **Next.js** (auto-detected).
+4. Optional env:
+   - `NEXT_PUBLIC_SITE_URL` — production domain (e.g. `https://your-app.vercel.app`)
+5. Deploy. Build command: `npm run build`. Output: `.next`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### GitHub → Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Connect the GitHub repository; every push to `main` triggers a production deploy.
 
-## Deploy on Vercel
+## Project structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+See [ARCHITECTURE.md](./ARCHITECTURE.md).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/           # Routes, sitemap, robots
+  features/      # Domain modules
+  components/    # UI, layout, sections
+  services/      # API layer
+  store/         # Zustand
+  types/ config/ constants/ utils/ styles/
+```
+
+## SEO
+
+- `src/app/sitemap.ts` — dynamic sitemap
+- `src/app/robots.ts` — robots.txt
+- Per-route `metadata` / `generateMetadata`
