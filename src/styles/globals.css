@@ -727,21 +727,25 @@ button {
 .brand-logo__text {
   font-family: var(--font-logo), "Comfortaa", cursive;
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: 1.65rem;
   line-height: 1;
-  letter-spacing: -0.02em;
-  color: #0a0a0a;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, #0a0a0a 0%, #0a0a0a 50%, #685aca 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-transform: lowercase;
   -webkit-font-smoothing: antialiased;
-  transition: color 0.3s ease, letter-spacing 0.3s ease, transform 0.3s ease;
+  transition: background-position 0.4s ease, letter-spacing 0.3s ease, transform 0.3s ease;
 }
 
 .brand-logo__dot {
   font-family: var(--font-logo), "Comfortaa", cursive;
   font-weight: 700;
-  font-size: 1.6rem;
+  font-size: 1.95rem;
   line-height: 1;
-  color: #7c3aed;
+  color: #685aca;
   margin-left: 1px;
   display: inline-block;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -749,7 +753,11 @@ button {
 
 /* Inverted Mode (dark backgrounds) */
 .brand-logo--inverted .brand-logo__text {
-  color: #ffffff;
+  background: linear-gradient(120deg, #ffffff 0%, #ffffff 50%, #a78bfa 100%);
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .brand-logo--inverted .brand-logo__dot {
@@ -758,12 +766,12 @@ button {
 
 /* Hover effects */
 .brand-logo-link:hover .brand-logo__text {
-  color: #7c3aed;
+  background-position: right center;
   transform: translateY(-1px);
 }
 
 .brand-logo-link:hover .brand-logo__dot {
-  transform: scale(1.25) rotate(10deg);
+  transform: scale(1.3) rotate(15deg) translateY(-2px);
   color: #d946ef;
 }
 
@@ -774,12 +782,12 @@ button {
 
 @media (min-width: 1024px) {
   .brand-logo__text {
-    font-size: 1.5rem;
-    letter-spacing: -0.025em;
+    font-size: 2.0rem;
+    letter-spacing: -0.035em;
   }
 
   .brand-logo__dot {
-    font-size: 1.75rem;
+    font-size: 2.4rem;
   }
 }
 
