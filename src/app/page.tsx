@@ -2,7 +2,7 @@ import HeroSlider from "@/components/sections/HeroSlider";
 import CategoryGrid from "@/components/sections/CategoryGrid";
 import ProductSection from "@/components/sections/ProductSection";
 import ShopTheLook from "@/components/sections/ShopTheLook";
-import InstagramSection from "@/components/sections/InstagramSection";
+// import InstagramSection from "@/components/sections/InstagramSection";
 import { getProductsByCollection, products } from "@/features/products";
 
 export default function HomePage() {
@@ -27,7 +27,7 @@ export default function HomePage() {
       <ShopTheLook />
       <ProductSection title="Audio and Video" products={audio} />
       <ProductSection title="Big Deals:" products={bigDeals} />
-      <InstagramSection />
+      {/* <InstagramSection /> */}
     </>
   );
 }
