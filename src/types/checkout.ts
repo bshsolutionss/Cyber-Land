@@ -11,7 +11,12 @@ export interface ShippingAddress {
   country: string;
 }
 
-export type PaymentMethod = "upi" | "card" | "cod" | "netbanking";
+export type PaymentMethod =
+  | "easypaisa"
+  | "jazzcash"
+  | "bank_transfer"
+  | "cod"
+  | "card";
 
 export interface CheckoutPayload {
   shipping: ShippingAddress;

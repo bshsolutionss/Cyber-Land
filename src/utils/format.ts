@@ -1,11 +1,11 @@
 import { siteConfig } from "@/config/site";
 
+/** Pakistani Rupee display: Rs. 1,000 */
 export function formatPrice(amount: number): string {
-  return new Intl.NumberFormat(siteConfig.locale, {
-    style: "currency",
-    currency: siteConfig.currency,
+  const formatted = new Intl.NumberFormat(siteConfig.locale, {
     maximumFractionDigits: 0,
   }).format(amount);
+  return `Rs. ${formatted}`;
 }
 
 export function calcDiscount(price: number, compareAt: number): number {

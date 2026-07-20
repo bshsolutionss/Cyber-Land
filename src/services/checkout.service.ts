@@ -21,7 +21,7 @@ export const checkoutService = {
 
   async estimateShipping(
     postalCode: string,
-    country = "IN"
+    country = "PK"
   ): Promise<{ amount: number; etaDays: number }> {
     void postalCode;
     void country;

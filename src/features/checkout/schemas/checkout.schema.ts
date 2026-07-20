@@ -15,7 +15,13 @@ export const shippingSchema = z.object({
 
 export const checkoutSchema = z.object({
   shipping: shippingSchema,
-  paymentMethod: z.enum(["upi", "card", "cod", "netbanking"]),
+  paymentMethod: z.enum([
+    "easypaisa",
+    "jazzcash",
+    "bank_transfer",
+    "cod",
+    "card",
+  ]),
   note: z.string().optional(),
 });
 

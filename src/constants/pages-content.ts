@@ -13,7 +13,7 @@ export type CmsPage = {
 export const supportPages: Record<string, CmsPage> = {
   contact: {
     title: "Contact Us",
-    subtitle: "Mon – Sat · 10am – 7pm IST",
+    subtitle: "Mon – Sat · 10am – 7pm PKT",
     blocks: [
       {
         type: "p",
@@ -24,14 +24,14 @@ export const supportPages: Record<string, CmsPage> = {
         type: "ul",
         items: [
           "Email: help@cyberland.com",
-          "Phone / WhatsApp: +91 9611507877",
-          "Hours: Monday – Saturday, 10:00 AM – 7:00 PM IST",
+          "Phone / WhatsApp: +92 345 8006009",
+          "Hours: Monday – Saturday, 10:00 AM – 7:00 PM PKT",
         ],
       },
       {
         type: "cta",
         label: "Chat on WhatsApp",
-        href: "https://wa.me/919611507877",
+        href: "https://wa.me/923458006009",
       },
       {
         type: "cta",
@@ -51,9 +51,9 @@ export const supportPages: Record<string, CmsPage> = {
       {
         type: "ul",
         items: [
-          "Free shipping on orders above ₹1,000 within India.",
+          "Free shipping on orders above Rs. 1,000 within Pakistan.",
           "Most orders ship within 1–2 business days.",
-          "Delivery timelines vary by pincode — track via Track Order.",
+          "Delivery timelines vary by postal code — track via Track Order.",
         ],
       },
       { type: "h2", text: "Returns & replacements" },
@@ -62,7 +62,7 @@ export const supportPages: Record<string, CmsPage> = {
         items: [
           "7 days return and replacement on eligible products*",
           "Items must be unused and in original packaging with all accessories.",
-          "Initiate returns through our ClickPost portal or contact support.",
+          "Initiate returns through our returns portal or contact support.",
         ],
       },
       { type: "h2", text: "Warranty" },
@@ -78,7 +78,7 @@ export const supportPages: Record<string, CmsPage> = {
       {
         type: "ul",
         items: [
-          "We accept UPI, cards, net banking, and other methods at checkout.",
+          "We accept Easypaisa, JazzCash, Bank Transfer, Cash on Delivery, and cards at checkout.",
           "All prices on the site are inclusive of applicable taxes unless stated otherwise.",
         ],
       },
@@ -223,7 +223,7 @@ export const supportPages: Record<string, CmsPage> = {
         items: [
           "Volume pricing on keyboards, mice, chairs, monitors, and audio",
           "Dedicated account support for large orders",
-          "Invoicing and delivery coordination across India",
+          "Invoicing and delivery coordination across Pakistan",
         ],
       },
       {
@@ -316,7 +316,7 @@ export const supportPages: Record<string, CmsPage> = {
     blocks: [
       {
         type: "p",
-        text: "Track Cyber Land orders in real time through our shipping partner ClickPost. You’ll need your order number and phone / email used at checkout.",
+        text: "Track Cyber Land orders in real time through our shipping partners. You’ll need your order number and phone / email used at checkout.",
       },
       {
         type: "cta",
@@ -325,7 +325,7 @@ export const supportPages: Record<string, CmsPage> = {
       },
       {
         type: "p",
-        text: "For delivery issues, contact help@cyberland.com or WhatsApp +91 9611507877 with your order ID.",
+        text: "For delivery issues, contact help@cyberland.com or WhatsApp +92 345 8006009 with your order ID.",
       },
       {
         type: "cta",
@@ -346,7 +346,7 @@ export const supportPages: Record<string, CmsPage> = {
       {
         type: "ul",
         items: [
-          "Use the ClickPost returns portal linked below",
+          "Use the returns portal linked below",
           "Or email help@cyberland.com with order ID and reason",
           "Our team will share pickup / replacement instructions",
         ],
@@ -492,7 +492,7 @@ export const policyPages: Record<string, CmsPage> = {
     blocks: [
       {
         type: "p",
-        text: "We ship across India. Free shipping applies on orders above ₹1,000 (or as stated in current promotions).",
+        text: "We ship across Pakistan. Free shipping applies on orders above Rs. 1,000 (or as stated in current promotions).",
       },
       { type: "h2", text: "Processing" },
       {
@@ -506,7 +506,7 @@ export const policyPages: Record<string, CmsPage> = {
       {
         type: "ul",
         items: [
-          "Delivery time depends on location and courier partner",
+          "Delivery time depends on city and courier partner across Pakistan",
           "Track shipments anytime via Track Order",
         ],
       },
@@ -528,8 +528,8 @@ export const policyPages: Record<string, CmsPage> = {
         type: "ul",
         items: [
           "Email: help@cyberland.com",
-          "Phone: +91 9611507877",
-          "Hours: Mon – Sat, 10am – 7pm IST",
+          "Phone: +92 345 8006009",
+          "Hours: Mon – Sat, 10am – 7pm PKT",
           "Support: WhatsApp available during business hours",
         ],
       },

@@ -60,7 +60,7 @@
 - Announcement bar (autoplay 3s)
 - Sticky header (always)
 - Mobile menu drawer (left)
-- Cart drawer (right) + free shipping threshold ₹1000
+- Cart drawer (right) + free shipping threshold Rs. 1000
 - Search drawer (top)
 - Product card: save badge, rating, hover ATC
 - Hero slider: 5s autoplay, fade/slide

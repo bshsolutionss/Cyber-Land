@@ -73,7 +73,7 @@ export const announcements = [
     href: "/products/anzu-v2-black-ultralight-ergonomic-wireless-gaming-mouse",
   },
   {
-    text: "Freebies on orders above ₹5000",
+    text: "Freebies on orders above Rs.5000",
     textMobile: "Freebies on orders above 5000",
     href: null as string | null,
   },

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { MessageCircle, Video, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { siteConfig } from "@/config/site";
 
 export default function LiveDemoFab() {
   const [open, setOpen] = useState(false);
@@ -55,9 +56,9 @@ export default function LiveDemoFab() {
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              <p className="mb-4 text-sm text-black/60">Mon - Sat : 10am - 7pm</p>
+              <p className="mb-4 text-sm text-black/60">{siteConfig.support.hours}</p>
               <a
-                href="https://wa.me/919611507877"
+                href={siteConfig.support.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary btn-full"

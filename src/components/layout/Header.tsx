@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import BrandLogo from "@/components/common/BrandLogo";
 import { mainNav, type NavItem } from "@/constants/navigation";
@@ -97,6 +97,59 @@ function HamburgerIcon({ className }: { className?: string }) {
   );
 }
 
+function NavChevronLeft({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 15 14"
+      fill="none"
+      stroke="currentColor"
+      aria-hidden
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6.33333 2.91675L2.25 7.00004M2.25 7.00004L6.33333 11.0834M2.25 7.00004H12.75"
+      />
+    </svg>
+  );
+}
+
+function NavChevronRight({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 15 14"
+      fill="none"
+      stroke="currentColor"
+      aria-hidden
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M2.25 7.00004H12.75M12.75 7.00004L8.66667 2.91675M12.75 7.00004L8.66667 11.0834"
+      />
+    </svg>
+  );
+}
+
+function ChevronDown({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.5 4.5L6 8L9.5 4.5" />
+    </svg>
+  );
+}
+
 /** Pill menu link with duplicate slide-up hover (with-block) */
 function MenuPill({
   label,
@@ -112,10 +165,26 @@ function MenuPill({
   const inner = (
     <>
       <span className="menu-item__text" data-text>
-        {label}
+        <span>{label}</span>
+        {asButton && (
+          <ChevronDown
+            className={cn(
+              "transition-transform duration-200",
+              open && "rotate-180"
+            )}
+          />
+        )}
       </span>
       <span className="menu-item__duplicate" aria-hidden>
-        {label}
+        <span>{label}</span>
+        {asButton && (
+          <ChevronDown
+            className={cn(
+              "transition-transform duration-200 text-white",
+              open && "rotate-180"
+            )}
+          />
+        )}
       </span>
     </>
   );
@@ -202,6 +271,27 @@ export default function Header() {
     useUI();
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const menuRef = useRef<HTMLUListElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateNavScroll = useCallback(() => {
+    const el = menuRef.current;
+    if (!el) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    setCanScrollLeft(el.scrollLeft > 2);
+    setCanScrollRight(maxScroll > 2 && el.scrollLeft < maxScroll - 2);
+  }, []);
+
+  const scrollNav = (dir: "left" | "right") => {
+    const el = menuRef.current;
+    if (!el) return;
+    const amount = Math.max(160, Math.floor(el.clientWidth * 0.45));
+    el.scrollBy({
+      left: dir === "left" ? -amount : amount,
+      behavior: "smooth",
+    });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -209,6 +299,21 @@ export default function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const el = menuRef.current;
+    if (!el) return;
+    updateNavScroll();
+    el.addEventListener("scroll", updateNavScroll, { passive: true });
+    window.addEventListener("resize", updateNavScroll);
+    const ro = new ResizeObserver(updateNavScroll);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", updateNavScroll);
+      window.removeEventListener("resize", updateNavScroll);
+      ro.disconnect();
+    };
+  }, [updateNavScroll]);
 
   return (
     <header
@@ -236,13 +341,29 @@ export default function Header() {
           <BrandLogo />
         </div>
 
-        {/* —— Desktop navigation (flex-wrap, with-block pills) —— */}
+        {/* —— Desktop category navigation (horizontal slider) —— */}
         <nav
           className="header-navigation"
           role="navigation"
           aria-label="Primary"
         >
-          <ul className="header-menu list-menu with-block">
+          <button
+            type="button"
+            className={cn(
+              "nav-scroll-btn nav-scroll-btn--left",
+              canScrollLeft && "nav-scroll-btn--visible"
+            )}
+            onClick={() => scrollNav("left")}
+            aria-label="Scroll categories left"
+            tabIndex={canScrollLeft ? 0 : -1}
+          >
+            <NavChevronLeft className="nav-scroll-btn__icon" />
+          </button>
+
+          <ul
+            ref={menuRef}
+            className="header-menu list-menu with-block"
+          >
             {mainNav.map((item) =>
               item.children?.length ? (
                 <NavDropdown
@@ -259,6 +380,19 @@ export default function Header() {
               )
             )}
           </ul>
+
+          <button
+            type="button"
+            className={cn(
+              "nav-scroll-btn nav-scroll-btn--right",
+              canScrollRight && "nav-scroll-btn--visible"
+            )}
+            onClick={() => scrollNav("right")}
+            aria-label="Scroll categories right"
+            tabIndex={canScrollRight ? 0 : -1}
+          >
+            <NavChevronRight className="nav-scroll-btn__icon" />
+          </button>
         </nav>
 
         {/* —— End icons —— */}

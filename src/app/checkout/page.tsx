@@ -25,9 +25,9 @@ export default function CheckoutPage() {
   } = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      paymentMethod: "upi",
+      paymentMethod: "easypaisa",
       shipping: {
-        country: "India",
+        country: "Pakistan",
       },
     },
   });
@@ -96,7 +96,7 @@ export default function CheckoutPage() {
             <div className="grid gap-3 sm:grid-cols-3">
               <Input placeholder="City" {...register("shipping.city")} />
               <Input placeholder="State" {...register("shipping.state")} />
-              <Input placeholder="PIN code" {...register("shipping.postalCode")} />
+              <Input placeholder="Postal code" {...register("shipping.postalCode")} />
             </div>
             <Input placeholder="Country" {...register("shipping.country")} />
 
@@ -105,10 +105,11 @@ export default function CheckoutPage() {
               className="input"
               {...register("paymentMethod")}
             >
-              <option value="upi">UPI</option>
+              <option value="easypaisa">Easypaisa</option>
+              <option value="jazzcash">JazzCash</option>
+              <option value="bank_transfer">Bank Transfer</option>
+              <option value="cod">Cash on Delivery</option>
               <option value="card">Card</option>
-              <option value="netbanking">Net banking</option>
-              <option value="cod">Cash on delivery</option>
             </select>
 
             {errors.root && (

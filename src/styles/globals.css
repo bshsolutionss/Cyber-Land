@@ -730,14 +730,10 @@ button {
   font-size: 1.65rem;
   line-height: 1;
   letter-spacing: -0.03em;
-  background: linear-gradient(120deg, #0a0a0a 0%, #0a0a0a 50%, #685aca 100%);
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #0a0a0a;
   text-transform: lowercase;
   -webkit-font-smoothing: antialiased;
-  transition: background-position 0.4s ease, letter-spacing 0.3s ease, transform 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .brand-logo__dot {
@@ -753,11 +749,7 @@ button {
 
 /* Inverted Mode (dark backgrounds) */
 .brand-logo--inverted .brand-logo__text {
-  background: linear-gradient(120deg, #ffffff 0%, #ffffff 50%, #a78bfa 100%);
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #ffffff;
 }
 
 .brand-logo--inverted .brand-logo__dot {
@@ -766,13 +758,13 @@ button {
 
 /* Hover effects */
 .brand-logo-link:hover .brand-logo__text {
-  background-position: right center;
+  color: #685aca;
   transform: translateY(-1px);
 }
 
 .brand-logo-link:hover .brand-logo__dot {
-  transform: scale(1.3) rotate(15deg) translateY(-2px);
-  color: #d946ef;
+  transform: scale(1.25) rotate(10deg);
+  color: #a56dcd;
 }
 
 .brand-logo-link:active .brand-logo__text,
@@ -791,12 +783,15 @@ button {
   }
 }
 
-/* Desktop navigation */
+/* Desktop category navigation (horizontal slider) */
 .header-navigation {
   display: none;
   grid-area: navigation;
+  align-items: center;
   justify-content: center;
   min-width: 0;
+  max-width: 100%;
+  position: relative;
 }
 
 @media (min-width: 1024px) {
@@ -807,18 +802,75 @@ button {
 
 .header-menu {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   list-style: none;
   margin: 0;
   padding: 0;
   gap: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-width: 100%;
+  width: 100%;
+}
+
+.header-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-scroll-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 9999px;
+  background: #ffffff;
+  color: #171717;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--animation-fast), background var(--animation-fast);
+}
+
+.nav-scroll-btn--left {
+  left: 0;
+}
+
+.nav-scroll-btn--right {
+  right: 0;
+}
+
+.nav-scroll-btn--visible {
+  display: inline-flex;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-scroll-btn:hover {
+  background: #171717;
+  color: #ffffff;
+}
+
+.nav-scroll-btn__icon {
+  width: 0.875rem;
+  height: 0.875rem;
 }
 
 .nav-item {
   position: relative;
   list-style: none;
+  flex-shrink: 0;
 }
 
 /* with-block pill menu item */

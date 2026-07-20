@@ -149,7 +149,7 @@ export default function ProductDetail({ product }: Props) {
               )}
             </div>
             <p className="mt-1 text-xs text-black/50">
-              Inclusive of all taxes. Free shipping on orders above ₹1,000.
+              Inclusive of all taxes. Free shipping on orders above Rs. 1,000.
             </p>
 
             {product.description && (
@@ -238,7 +238,7 @@ export default function ProductDetail({ product }: Props) {
             <ul className="mt-8 grid gap-3 border-t border-black/5 pt-6 text-sm">
               <li className="flex items-center gap-3">
                 <Truck className="h-5 w-5 shrink-0 opacity-70" strokeWidth={1.5} />
-                Free shipping on orders above ₹1,000
+                Free shipping on orders above Rs. 1,000
               </li>
               <li className="flex items-center gap-3">
                 <RotateCcw className="h-5 w-5 shrink-0 opacity-70" strokeWidth={1.5} />

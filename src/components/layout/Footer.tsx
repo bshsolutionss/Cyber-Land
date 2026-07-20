@@ -8,6 +8,7 @@ import {
   footerQuickLinks,
   footerSocials,
 } from "@/constants/navigation";
+import { siteConfig } from "@/config/site";
 import { cn } from "@/utils";
 import BrandLogo from "@/components/common/BrandLogo";
 
@@ -92,16 +93,16 @@ export default function Footer() {
             <FooterAccordion title="Reach out to us:">
               <div className="flex flex-col gap-1 pb-4 pt-2">
                 <a
-                  href="tel:+919611507877"
+                  href={siteConfig.support.phoneHref}
                   className="text-sm leading-tight text-white/90 hover:text-white md:text-base"
                 >
-                  +91 9611507877
+                  {siteConfig.support.phone}
                 </a>
                 <a
-                  href="mailto:help@cyberland.com"
+                  href={`mailto:${siteConfig.support.email}`}
                   className="text-sm leading-tight text-white/90 hover:text-white md:text-base"
                 >
-                  help@cyberland.com
+                  {siteConfig.support.email}
                 </a>
               </div>
             </FooterAccordion>

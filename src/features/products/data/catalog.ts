@@ -557,8 +557,8 @@ export const collectionMeta: Record<string, CollectionMeta> = {
     description: "Popular Cyber Land products that are available again.",
   },
   "best-deals-under-1999": {
-    title: "Best Deals under ₹1999",
-    description: "Top picks under ₹1,999.",
+    title: "Best Deals under Rs.1999",
+    description: "Top picks under Rs. 1,999.",
   },
   "end-of-season-sale": {
     title: "EOSS All Deals",

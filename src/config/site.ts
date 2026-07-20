@@ -10,9 +10,9 @@ export const siteConfig = {
       : "http://localhost:3000"),
   support: {
     email: "help@cyberland.com",
-    phone: "+91 9611507877",
-    phoneHref: "tel:+919611507877",
-    whatsapp: "https://wa.me/919611507877",
+    phone: "+92 345 8006009",
+    phoneHref: "tel:+923458006009",
+    whatsapp: "https://wa.me/923458006009",
     hours: "Mon - Sat : 10am - 7pm",
   },
   social: {
@@ -21,8 +21,15 @@ export const siteConfig = {
     youtube: "https://www.youtube.com/@CyberLand",
     discord: "https://discord.gg/uBn22bYTNB",
   },
-  currency: "INR" as const,
-  locale: "en-IN" as const,
+  currency: "PKR" as const,
+  locale: "en-PK" as const,
   freeShippingThreshold: 1000,
   trackOrderUrl: "/pages/track-order",
+  defaultCountry: "Pakistan",
+  paymentMethods: [
+    "easypaisa",
+    "jazzcash",
+    "bank_transfer",
+    "cod",
+  ] as const,
 } as const;

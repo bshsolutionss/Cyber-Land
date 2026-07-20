@@ -41,6 +41,8 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
   authors: [{ name: siteConfig.legalName }],
+  // Explicitly disable all favicon / app icon metadata
+  icons: {},
   keywords: [
     "Cyber Land",
     "laptops",
@@ -52,10 +54,11 @@ export const metadata: Metadata = {
     "mechanical keyboard",
     "computer accessories",
     "electronics",
+    "Pakistan",
   ],
   openGraph: {
     type: "website",
-    locale: "en_IN",
+    locale: "en_PK",
     url: siteConfig.url,
     siteName: siteConfig.name,
     title: "Cyber Land: Laptops, Gaming PCs, Hardware & Accessories",
