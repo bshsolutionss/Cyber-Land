@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
 import LoginForm from "@/components/forms/LoginForm";
-
-export const metadata: Metadata = {
-  title: "Log in",
-  description: "Log in to your Cyber Land account.",
-};
 
 export default function LoginPage() {
   return (

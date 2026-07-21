@@ -39,15 +39,15 @@
   --animation-fast: 0.225s cubic-bezier(0.7, 0, 0.3, 1);
   --animation-smooth: 0.525s cubic-bezier(0.7, 0, 0.3, 1);
   --animation-drawer: 0.6s cubic-bezier(0.7, 0, 0.2, 1);
-  --menu-item-height: 2.625rem; /* --sp-10d5 */
+  --menu-item-height: 2.375rem;
   --icon-size: 1.5rem; /* --sp-6 */
 }
 
 @media (min-width: 1024px) {
   :root {
     --page-padding: 2.25rem;
-    --header-items-gap: 2em;
-    --header-nav-gap: 2em;
+    --header-items-gap: 1rem;
+    --header-nav-gap: 0;
   }
 }
 
@@ -55,13 +55,13 @@
   :root {
     --page-padding: 3rem;
     --gap-padding: 3rem;
+    --header-items-gap: 1.25rem;
   }
 }
 
 @media (min-width: 1400px) {
   :root {
-    --header-items-gap: 2.5em;
-    --header-nav-gap: 2.5em;
+    --header-items-gap: 1.5rem;
   }
 }
 
@@ -775,12 +775,12 @@ button {
 
 @media (min-width: 1024px) {
   .brand-logo__text {
-    font-size: 2.0rem;
+    font-size: 1.75rem;
     letter-spacing: -0.035em;
   }
 
   .brand-logo__dot {
-    font-size: 2.4rem;
+    font-size: 2.1rem;
   }
 }
 
@@ -803,22 +803,18 @@ button {
 
 .header-menu {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
   gap: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   max-width: 100%;
   width: 100%;
 }
 
+/* Hide scrollbar (kept for mobile fallback) */
 .header-menu::-webkit-scrollbar {
   display: none;
 }
@@ -858,6 +854,13 @@ button {
   pointer-events: auto;
 }
 
+/* Hide scroll arrows on desktop — menu wraps instead */
+@media (min-width: 1024px) {
+  .nav-scroll-btn {
+    display: none !important;
+  }
+}
+
 .nav-scroll-btn:hover {
   background: #171717;
   color: #ffffff;
@@ -881,12 +884,12 @@ button {
   align-items: center;
   justify-content: center;
   height: var(--menu-item-height);
-  padding-inline: clamp(0.45rem, 0.65vw, 0.9rem);
+  padding-inline: 0.75rem;
   border-radius: 9999px;
   overflow: hidden;
   cursor: pointer;
   font-family: var(--font-body);
-  font-size: clamp(0.8125rem, 0.85vw, 0.9375rem);
+  font-size: 0.875rem;
   font-weight: var(--font-navigation-weight);
   color: #171717;
   line-height: 1;
@@ -917,7 +920,7 @@ button {
   inset: 0;
   width: 100%;
   height: 100%;
-  padding-inline: clamp(0.45rem, 0.65vw, 0.9rem);
+  padding-inline: 0.75rem;
   border-radius: 9999px;
   color: #ffffff;
   background-color: #171717;
@@ -938,6 +941,33 @@ button {
 .nav-item--dropdown:hover .menu-item__text {
   opacity: 0;
   transform: translateY(-10%) scale(0.6);
+}
+
+/* Responsive nav-item scaling for larger screens */
+@media (min-width: 1400px) {
+  .menu-item {
+    padding-inline: 1rem;
+    font-size: 0.9rem;
+  }
+  .menu-item__duplicate {
+    padding-inline: 1rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .menu-item {
+    padding-inline: 1.25rem;
+    font-size: 0.9375rem;
+  }
+  .menu-item__duplicate {
+    padding-inline: 1.25rem;
+  }
+  .brand-logo__text {
+    font-size: 2rem;
+  }
+  .brand-logo__dot {
+    font-size: 2.4rem;
+  }
 }
 
 /* Dropdown (Shop by Setup / Software & Support) */
