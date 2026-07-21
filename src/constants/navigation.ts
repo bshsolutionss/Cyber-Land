@@ -15,6 +15,7 @@ export type NavItem = {
  */
 export const mainNav: NavItem[] = [
   { label: "Bestsellers", href: "/collections/best-sellers" },
+  /*
   {
     label: "Shop by Setup",
     href: "#",
@@ -37,20 +38,24 @@ export const mainNav: NavItem[] = [
       },
     ],
   },
+  */
   { label: "New Launches", href: "/collections/new-launches" },
   { label: "Laptops", href: "/collections/laptops" },
   { label: "Monitor", href: "/collections/monitors" },
-  { label: "Ergo Chairs", href: "/collections/ergo-wfh-chairs" },
+  /* { label: "Ergo Chairs", href: "/collections/ergo-wfh-chairs" }, */
   { label: "Keyboards", href: "/collections/mechanical-keyboards" },
   {
     label: "Mouse and Mousepads",
     href: "/collections/gaming-mouse-and-mousepad",
   },
-  { label: "Controllers", href: "/collections/controllers" },
+  /* { label: "Controllers", href: "/collections/controllers" }, */
+  /*
   {
     label: "Audio Video & Lights",
     href: "/collections/audio-video-and-lights",
   },
+  */
+  /*
   {
     label: "Software & Support",
     href: "#",
@@ -60,6 +65,7 @@ export const mainNav: NavItem[] = [
       { label: "Contact us", href: "/pages/contact" },
     ],
   },
+  */
 ];
 
 /** Mobile drawer extras after main nav (live: Wishlist only) */
