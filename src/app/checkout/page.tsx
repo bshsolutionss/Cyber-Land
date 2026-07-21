@@ -25,7 +25,7 @@ export default function CheckoutPage() {
   } = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      paymentMethod: "easypaisa",
+      paymentMethod: "cod",
       shipping: {
         provinceState: "Punjab",
       },
@@ -65,7 +65,7 @@ export default function CheckoutPage() {
 
   const onSubmit = async (values: CheckoutFormValues) => {
     try {
-      const result = await checkoutService.placeOrder(values, subtotal);
+      const result = await checkoutService.placeOrder(values, subtotal + 200);
       clearCart();
       setOrderId(result.orderId);
     } catch (e) {
@@ -94,24 +94,62 @@ export default function CheckoutPage() {
             </div>
             <Input placeholder="Order notes (optional)" {...register("note")} />
 
-            <h2 className="heading mt-4 text-lg font-medium">Payment</h2>
-            <select
-              className="input"
-              {...register("paymentMethod")}
-            >
-              <option value="easypaisa">Easypaisa</option>
-              <option value="jazzcash">JazzCash</option>
-              <option value="bank_transfer">Bank Transfer</option>
-              <option value="cod">Cash on Delivery</option>
-              <option value="card">Card</option>
-            </select>
+            <div className="mt-6">
+              <h2 className="text-lg font-medium">Shipping method</h2>
+              <div className="mt-3 flex items-center justify-between rounded-md border border-[#d4cfc9] bg-[#faf7f2] px-4 py-4 text-sm">
+                <span>Delivery Charges</span>
+                <span className="font-medium">Rs 200.00</span>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <h2 className="text-lg font-medium">Payment</h2>
+              <p className="mt-1 text-sm text-black/60">
+                All transactions are secure and encrypted.
+              </p>
+              <div className="mt-3 overflow-hidden rounded-md border border-[#d4cfc9]">
+                <div className="border-b border-[#d4cfc9] bg-[#faf7f2] px-4 py-4 text-sm font-medium">
+                  Cash on Delivery (COD)
+                </div>
+                <div className="bg-[#f5f5f5] px-4 py-5 text-center text-sm text-black/80">
+                  Delivery takes 4-7 Working Days
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <h2 className="text-lg font-medium">Billing address</h2>
+              <div className="mt-3 overflow-hidden rounded-md border border-[#d4cfc9]">
+                <label className="flex cursor-pointer items-center gap-3 border-b border-[#d4cfc9] bg-[#faf7f2] px-4 py-4 text-sm">
+                  <input
+                    type="radio"
+                    name="billing"
+                    defaultChecked
+                    className="h-4 w-4 accent-[#4a3623]"
+                  />
+                  <span className="font-medium">Same as shipping address</span>
+                </label>
+                <label className="flex cursor-pointer items-center gap-3 bg-white px-4 py-4 text-sm">
+                  <input
+                    type="radio"
+                    name="billing"
+                    className="h-4 w-4 accent-[#4a3623]"
+                  />
+                  <span>Use a different billing address</span>
+                </label>
+              </div>
+            </div>
 
             {errors.root && (
-              <p className="text-sm text-red-600">{errors.root.message}</p>
+              <p className="mt-4 text-sm text-red-600">{errors.root.message}</p>
             )}
 
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Placing order…" : `Pay ${formatPrice(subtotal)}`}
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="mt-6 h-14 w-full bg-[#3d2e1f] text-base hover:bg-[#2b1d12]"
+            >
+              {isSubmitting ? "Placing order…" : "Complete order"}
             </Button>
           </form>
 
@@ -132,12 +170,20 @@ export default function CheckoutPage() {
                 </li>
               ))}
             </ul>
-            <div className="flex justify-between border-t border-black/10 pt-3 text-sm font-semibold">
+            <div className="flex justify-between pt-3 text-sm">
               <span>Subtotal</span>
               <span>{formatPrice(subtotal)}</span>
             </div>
+            <div className="flex justify-between py-2 text-sm">
+              <span>Shipping</span>
+              <span>{formatPrice(200)}</span>
+            </div>
+            <div className="flex justify-between border-t border-black/10 pt-3 text-base font-semibold">
+              <span>Total</span>
+              <span>{formatPrice(subtotal + 200)}</span>
+            </div>
             <p className="mt-2 text-xs text-black/45">
-              Tax included. Shipping calculated at checkout.
+              Tax included.
             </p>
           </aside>
         </div>
