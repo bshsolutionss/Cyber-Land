@@ -17,6 +17,7 @@ export const ROUTES = {
     chairs: "/collections/ergo-wfh-chairs",
     audio: "/collections/audio-video-and-lights",
     monitors: "/collections/monitors",
+    laptops: "/collections/laptops",
     newLaunches: "/collections/new-launches",
     controllers: "/collections/controllers",
   },

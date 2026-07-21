@@ -368,6 +368,93 @@ export const products: Product[] = [
       "Nexus RGB Gamepad with customisable lighting, ergonomic grips, and wide platform compatibility.",
     tags: ["controller", "rgb", "gaming"],
   },
+  {
+    id: "25",
+    handle: "cyber-pulse-15-gaming-laptop",
+    title: 'Cyber Pulse 15" RTX Gaming Laptop',
+    price: 189999,
+    compareAtPrice: 249999,
+    image:
+      "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=1080&q=80",
+    rating: 4.8,
+    reviewCount: 94,
+    available: true,
+    hasVariants: true,
+    collection: ["laptops", "best-sellers", "gamers-essentials", "new-launches"],
+    description:
+      "Cyber Pulse 15 — high-refresh gaming laptop with RTX graphics, fast SSD storage, and a chassis built for marathon sessions.",
+    tags: ["laptop", "gaming", "rtx"],
+    badge: "NEW",
+  },
+  {
+    id: "26",
+    handle: "cyber-air-14-ultrabook",
+    title: 'Cyber Air 14" Ultrabook',
+    price: 129999,
+    compareAtPrice: 169999,
+    image:
+      "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1080&q=80",
+    rating: 4.7,
+    reviewCount: 61,
+    available: true,
+    hasVariants: true,
+    collection: ["laptops", "work-from-home-pro", "best-sellers"],
+    description:
+      "Cyber Air 14 — featherweight ultrabook for creators and professionals. All-day battery, silent cooling, and a crisp IPS display.",
+    tags: ["laptop", "ultrabook", "portable"],
+  },
+  {
+    id: "27",
+    handle: "cyber-forge-16-creator-laptop",
+    title: 'Cyber Forge 16" Creator Laptop',
+    price: 219999,
+    compareAtPrice: 289999,
+    image:
+      "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=1080&q=80",
+    rating: 4.9,
+    reviewCount: 37,
+    available: true,
+    hasVariants: false,
+    collection: ["laptops", "streamers-essential", "new-launches"],
+    description:
+      "Cyber Forge 16 — color-accurate creator laptop with dedicated GPU, high-res display, and pro-grade ports for streaming and editing.",
+    tags: ["laptop", "creator", "16-inch"],
+    badge: "NEW",
+  },
+  {
+    id: "28",
+    handle: "cyber-spark-15-student-laptop",
+    title: 'Cyber Spark 15" Student Laptop',
+    price: 79999,
+    compareAtPrice: 109999,
+    image:
+      "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=1080&q=80",
+    rating: 4.5,
+    reviewCount: 128,
+    available: true,
+    hasVariants: false,
+    collection: ["laptops", "pc-builder-starter-kit"],
+    description:
+      "Cyber Spark 15 — reliable everyday laptop for study, browsing, and light creative work. Fast boot, full HD screen, and solid battery life.",
+    tags: ["laptop", "student", "everyday"],
+  },
+  {
+    id: "29",
+    handle: "cyber-titan-17-gaming-laptop",
+    title: 'Cyber Titan 17" Extreme Gaming Laptop',
+    price: 299999,
+    compareAtPrice: 379999,
+    image:
+      "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=1080&q=80",
+    rating: 4.8,
+    reviewCount: 52,
+    available: true,
+    hasVariants: true,
+    collection: ["laptops", "gamers-essentials"],
+    description:
+      "Cyber Titan 17 — desktop-class power in a 17-inch chassis. Extreme cooling, high-refresh panel, and RGB keyboard for competitive gaming.",
+    tags: ["laptop", "gaming", "17-inch"],
+  },
 ];
 
 /**
@@ -439,6 +526,11 @@ export const heroSlidesCdn: HeroSlide[] = [
 ];
 
 export const categories: Category[] = [
+  {
+    title: "Laptops",
+    href: "/collections/laptops",
+    image: "/files/laptop_transparent.png",
+  },
   {
     title: "Keyboards",
     href: "/collections/mechanical-keyboards",
@@ -552,6 +644,11 @@ export const collectionMeta: Record<string, CollectionMeta> = {
   monitors: {
     title: "Monitors",
     description: "High-refresh gaming and creator monitors.",
+  },
+  laptops: {
+    title: "Laptops",
+    description:
+      "Gaming, creator, and everyday laptops engineered for performance.",
   },
   "new-launches": {
     title: "New Launches",
@@ -674,14 +771,21 @@ export function getProductsByCollection(handle: string): Product[] {
   if (h === "back-in-stock") {
     return products.filter((p) => p.available && (p.rating ?? 0) >= 4.5);
   }
+  if (h === "laptops") {
+    return products.filter(
+      (p) => p.collection.includes("laptops") || p.tags?.includes("laptop")
+    );
+  }
   if (h === "gaming-gear") {
     return products.filter(
       (p) =>
         p.collection.includes("mechanical-keyboards") ||
         p.collection.includes("gaming-mouse-and-mousepad") ||
         p.collection.includes("controllers") ||
+        p.collection.includes("laptops") ||
         p.tags?.includes("keyboard") ||
-        p.tags?.includes("mouse")
+        p.tags?.includes("mouse") ||
+        p.tags?.includes("laptop")
     );
   }
   if (h === "mouse-and-mousepads") {
@@ -729,7 +833,8 @@ export function getProductsByCollection(handle: string): Product[] {
         p.collection.includes("pc-builder-starter-kit") ||
         p.collection.includes("mechanical-keyboards") ||
         p.collection.includes("gaming-mouse-and-mousepad") ||
-        p.collection.includes("monitors")
+        p.collection.includes("monitors") ||
+        p.collection.includes("laptops")
     );
   }
   if (h === "work-from-home-pro") {
@@ -738,7 +843,8 @@ export function getProductsByCollection(handle: string): Product[] {
         p.collection.includes("work-from-home-pro") ||
         p.collection.includes("ergo-wfh-chairs") ||
         p.collection.includes("monitors") ||
-        p.collection.includes("audio-video-and-lights")
+        p.collection.includes("audio-video-and-lights") ||
+        p.collection.includes("laptops")
     );
   }
   if (h === "gamers-essentials") {
@@ -747,7 +853,8 @@ export function getProductsByCollection(handle: string): Product[] {
         p.collection.includes("gamers-essentials") ||
         p.collection.includes("mechanical-keyboards") ||
         p.collection.includes("gaming-mouse-and-mousepad") ||
-        p.collection.includes("monitors")
+        p.collection.includes("monitors") ||
+        p.collection.includes("laptops")
     );
   }
 

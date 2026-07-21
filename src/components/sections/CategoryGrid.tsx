@@ -31,7 +31,7 @@ export default function CategoryGrid() {
           </em>
         </h2>
 
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4 lg:grid-cols-3 xl:grid-cols-6">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.href}
@@ -48,7 +48,7 @@ export default function CategoryGrid() {
                   src={cat.image}
                   alt={cat.title}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                  className={`object-cover transition-transform duration-500 group-hover:scale-[1.05] ${cat.image.includes('transparent') ? 'mix-blend-multiply' : ''}`}
                   sizes="(max-width: 768px) 50vw, 20vw"
                 />
                 <div className="category-card__label">

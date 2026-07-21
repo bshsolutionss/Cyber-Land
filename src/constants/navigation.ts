@@ -38,6 +38,7 @@ export const mainNav: NavItem[] = [
     ],
   },
   { label: "New Launches", href: "/collections/new-launches" },
+  { label: "Laptops", href: "/collections/laptops" },
   { label: "Monitor", href: "/collections/monitors" },
   { label: "Ergo Chairs", href: "/collections/ergo-wfh-chairs" },
   { label: "Keyboards", href: "/collections/mechanical-keyboards" },
