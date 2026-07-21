@@ -27,7 +27,7 @@ export default function CheckoutPage() {
     defaultValues: {
       paymentMethod: "easypaisa",
       shipping: {
-        country: "Pakistan",
+        provinceState: "Punjab",
       },
     },
   });
@@ -85,20 +85,14 @@ export default function CheckoutPage() {
             className="flex flex-col gap-4"
           >
             <h2 className="heading text-lg font-medium">Shipping</h2>
+            <Input placeholder="Full name" {...register("shipping.fullName")} />
+            <Input placeholder="Phone Number (Preferred) or Email Address" {...register("shipping.contactInfo")} />
+            <Input placeholder="Address" {...register("shipping.address")} />
             <div className="grid gap-3 sm:grid-cols-2">
-              <Input placeholder="First name" {...register("shipping.firstName")} />
-              <Input placeholder="Last name" {...register("shipping.lastName")} />
-            </div>
-            <Input type="email" placeholder="Email" {...register("shipping.email")} />
-            <Input placeholder="Phone" {...register("shipping.phone")} />
-            <Input placeholder="Address" {...register("shipping.address1")} />
-            <Input placeholder="Apartment, suite (optional)" {...register("shipping.address2")} />
-            <div className="grid gap-3 sm:grid-cols-3">
               <Input placeholder="City" {...register("shipping.city")} />
-              <Input placeholder="State" {...register("shipping.state")} />
-              <Input placeholder="Postal code" {...register("shipping.postalCode")} />
+              <Input placeholder="Province / State" {...register("shipping.provinceState")} />
             </div>
-            <Input placeholder="Country" {...register("shipping.country")} />
+            <Input placeholder="Order notes (optional)" {...register("note")} />
 
             <h2 className="heading mt-4 text-lg font-medium">Payment</h2>
             <select

@@ -19,19 +19,7 @@ export default function ProductCard({ product, className, priority }: Props) {
 
   const cta = () => {
     if (!product.available) {
-      if (product.amazonLink) {
-        return (
-          <a
-            href={product.amazonLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-secondary btn-sm btn-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Buy on Amazon
-          </a>
-        );
-      }
+
       return (
         <Link
           href={`/products/${product.handle}?notify=1`}

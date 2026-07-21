@@ -1,16 +1,15 @@
 import { z } from "zod";
 
 export const shippingSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  email: z.string().email("Enter a valid email"),
-  phone: z.string().min(10, "Enter a valid phone number"),
-  address1: z.string().min(3, "Address is required"),
-  address2: z.string().optional(),
+  fullName: z.string().min(1, "Full name is required"),
+  contactInfo: z.string().refine((val) => {
+    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    const isPhone = /^\+?[\d\s-]{10,}$/.test(val);
+    return isEmail || isPhone;
+  }, "Enter a valid phone number or email"),
+  address: z.string().min(3, "Address is required"),
   city: z.string().min(1, "City is required"),
-  state: z.string().min(1, "State is required"),
-  postalCode: z.string().min(4, "Postal code is required"),
-  country: z.string().min(2, "Country is required"),
+  provinceState: z.string().min(1, "State/Province is required"),
 });
 
 export const checkoutSchema = z.object({

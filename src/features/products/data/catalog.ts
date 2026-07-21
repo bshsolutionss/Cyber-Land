@@ -76,8 +76,6 @@ export const products: Product[] = [
     reviewCount: 42,
     available: false,
     hasVariants: false,
-    amazonLink:
-      "https://www.amazon.in/dp-Wireless-Mechanical-Keyboard/dp/B0FLKD14YD",
     collection: ["mechanical-keyboards"],
     description: "All-white Swarm X — wireless mechanical excellence for pure desk aesthetics.",
     tags: ["keyboard", "wireless"],

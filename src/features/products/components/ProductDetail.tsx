@@ -219,15 +219,6 @@ export default function ProductDetail({ product }: Props) {
                     Buy it now
                   </button>
                 </>
-              ) : product.amazonLink ? (
-                <a
-                  href={product.amazonLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary flex-1"
-                >
-                  Buy on Amazon
-                </a>
               ) : (
                 <button type="button" className="btn btn-secondary flex-1">
                   Notify me when it&apos;s available

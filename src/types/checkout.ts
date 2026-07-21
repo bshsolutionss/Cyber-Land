@@ -1,14 +1,9 @@
 export interface ShippingAddress {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  address1: string;
-  address2?: string;
+  fullName: string;
+  contactInfo: string;
+  address: string;
   city: string;
-  state: string;
-  postalCode: string;
-  country: string;
+  provinceState: string;
 }
 
 export type PaymentMethod =

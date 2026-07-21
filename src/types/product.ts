@@ -11,7 +11,6 @@ export interface Product {
   reviewCount?: number;
   available: boolean;
   hasVariants?: boolean;
-  amazonLink?: string;
   collection: string[];
   description?: string;
   tags?: string[];
