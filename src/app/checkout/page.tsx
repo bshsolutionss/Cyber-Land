@@ -96,7 +96,7 @@ export default function CheckoutPage() {
 
             <div className="mt-6">
               <h2 className="text-lg font-medium">Shipping method</h2>
-              <div className="mt-3 flex items-center justify-between rounded-md border border-[#d4cfc9] bg-[#faf7f2] px-4 py-4 text-sm">
+              <div className="mt-3 flex items-center justify-between rounded-md border border-black/10 bg-[#fafafa] px-4 py-4 text-sm">
                 <span>Delivery Charges</span>
                 <span className="font-medium">Rs 200.00</span>
               </div>
@@ -107,8 +107,8 @@ export default function CheckoutPage() {
               <p className="mt-1 text-sm text-black/60">
                 All transactions are secure and encrypted.
               </p>
-              <div className="mt-3 overflow-hidden rounded-md border border-[#d4cfc9]">
-                <div className="border-b border-[#d4cfc9] bg-[#faf7f2] px-4 py-4 text-sm font-medium">
+              <div className="mt-3 overflow-hidden rounded-md border border-black/10">
+                <div className="border-b border-black/10 bg-[#fafafa] px-4 py-4 text-sm font-medium">
                   Cash on Delivery (COD)
                 </div>
                 <div className="bg-[#f5f5f5] px-4 py-5 text-center text-sm text-black/80">
@@ -119,13 +119,13 @@ export default function CheckoutPage() {
 
             <div className="mt-6">
               <h2 className="text-lg font-medium">Billing address</h2>
-              <div className="mt-3 overflow-hidden rounded-md border border-[#d4cfc9]">
-                <label className="flex cursor-pointer items-center gap-3 border-b border-[#d4cfc9] bg-[#faf7f2] px-4 py-4 text-sm">
+              <div className="mt-3 overflow-hidden rounded-md border border-black/10">
+                <label className="flex cursor-pointer items-center gap-3 border-b border-black/10 bg-[#fafafa] px-4 py-4 text-sm">
                   <input
                     type="radio"
                     name="billing"
                     defaultChecked
-                    className="h-4 w-4 accent-[#4a3623]"
+                    className="h-4 w-4 accent-black"
                   />
                   <span className="font-medium">Same as shipping address</span>
                 </label>
@@ -133,7 +133,7 @@ export default function CheckoutPage() {
                   <input
                     type="radio"
                     name="billing"
-                    className="h-4 w-4 accent-[#4a3623]"
+                    className="h-4 w-4 accent-black"
                   />
                   <span>Use a different billing address</span>
                 </label>
@@ -147,7 +147,7 @@ export default function CheckoutPage() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="mt-6 h-14 w-full bg-[#3d2e1f] text-base hover:bg-[#2b1d12]"
+              className="mt-6 h-14 w-full text-base"
             >
               {isSubmitting ? "Placing order…" : "Complete order"}
             </Button>
