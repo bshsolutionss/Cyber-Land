@@ -12,15 +12,14 @@ import { cn } from "@/utils";
  * 1) Anzu V2   — banner3.png / banner3mob.png
  * 2) Obsidian  — Frame_1000007627.png / qpricedark1.1.png
  * 3) Arma      — Frame_1000007021.png / desktop_banner_26.png
- * 4) Hive75 V2 — banner2_….png / banner2mob.png
  */
 const SLIDES = [
   {
     id: 1,
     href: "/products/anzu-v2-black-ultralight-ergonomic-wireless-gaming-mouse",
     alt: "Anzu V2 New Launch",
-    desktop: "/hero/1-anzu.png",
-    mobile: "/hero/1-anzu-m.png",
+    desktop: "/hero/1-anzu-crimson.png",
+    mobile: "/hero/1-anzu-m-crimson.png",
     desktopAlt: "/hero/anzu-desktop.png",
     mobileAlt: "/hero/anzu-mobile.png",
     desktopCdn:
@@ -32,8 +31,8 @@ const SLIDES = [
     id: 2,
     href: "/collections/monitors",
     alt: "Obsidian 27 Gaming Monitor",
-    desktop: "/hero/2-obsidian.png",
-    mobile: "/hero/2-obsidian-m.png",
+    desktop: "/hero/2-obsidian-crimson.png",
+    mobile: "/hero/2-obsidian-m-crimson.png",
     desktopAlt: "/hero/monitors-desktop.png",
     mobileAlt: "/hero/monitors-mobile.png",
     desktopCdn:
@@ -45,27 +44,14 @@ const SLIDES = [
     id: 3,
     href: "/products/arma-black-ultralight-gaming-mouse",
     alt: "Arma Ultralight Mouse",
-    desktop: "/hero/3-arma.png",
-    mobile: "/hero/3-arma-m.png",
+    desktop: "/hero/3-arma-crimson.png",
+    mobile: "/hero/3-arma-m-crimson.png",
     desktopAlt: "/hero/arma-desktop.png",
     mobileAlt: "/hero/arma-mobile.png",
     desktopCdn:
       "https://cdn.shopify.com/s/files/1/0619/4325/1121/files/Frame_1000007021.png?v=1774432814&width=2400",
     mobileCdn:
       "https://cdn.shopify.com/s/files/1/0619/4325/1121/files/desktop_banner_26.png?v=1774432814&width=1000",
-  },
-  {
-    id: 4,
-    href: "/products/hive75-v2-black-purple-wired-mechanical-gaming-keyboard",
-    alt: "Hive75 V2 Keyboard",
-    desktop: "/hero/4-hive75.png",
-    mobile: "/hero/4-hive75-m.png",
-    desktopAlt: "/hero/hive75-desktop.png",
-    mobileAlt: "/hero/hive75-mobile.png",
-    desktopCdn:
-      "https://cdn.shopify.com/s/files/1/0619/4325/1121/files/banner2_258c725b-501e-4498-9759-592ab720acef.png?v=1781176454&width=2400",
-    mobileCdn:
-      "https://cdn.shopify.com/s/files/1/0619/4325/1121/files/banner2mob.png?v=1781176454&width=1000",
   },
 ] as const;
 
