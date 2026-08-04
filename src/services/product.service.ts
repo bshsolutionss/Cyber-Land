@@ -4,25 +4,59 @@ import {
   getProductsByCollection,
   products,
 } from "@/features/products/data/catalog";
+import { woocommerceService } from "./woocommerce.service";
 
 /**
  * Product service — all product data access goes through here.
- * Swap catalog implementation for a real API without touching UI.
+ * Connects directly to WooCommerce REST API when configured in .env.local,
+ * with fallback to local catalog.
  */
 export const productService = {
   async getAll(): Promise<Product[]> {
+    if (woocommerceService.isConfigured()) {
+      try {
+        const wcProducts = await woocommerceService.getProducts();
+        if (wcProducts.length > 0) return wcProducts;
+      } catch (err) {
+        console.warn("WooCommerce API fetch failed, using catalog fallback:", err);
+      }
+    }
     return [...products];
   },
 
   async getByHandle(handle: string): Promise<Product | null> {
+    if (woocommerceService.isConfigured()) {
+      try {
+        const wcProducts = await woocommerceService.getProducts({ slug: handle });
+        if (wcProducts.length > 0) return wcProducts[0];
+      } catch (err) {
+        console.warn("WooCommerce API getByHandle failed, using catalog fallback:", err);
+      }
+    }
     return products.find((p) => p.handle === handle) ?? null;
   },
 
   async getById(id: string): Promise<Product | null> {
+    if (woocommerceService.isConfigured()) {
+      try {
+        const product = await woocommerceService.getProductById(id);
+        if (product) return product;
+      } catch (err) {
+        console.warn("WooCommerce API getById failed, using catalog fallback:", err);
+      }
+    }
     return products.find((p) => p.id === id) ?? null;
   },
 
   async getByCollection(handle: string): Promise<Product[]> {
+    if (woocommerceService.isConfigured()) {
+      try {
+        const wcProducts = await woocommerceService.getProducts({ category: handle });
+        if (wcProducts.length > 0) return wcProducts;
+      } catch (err) {
+        console.warn("WooCommerce API getByCollection failed, using catalog fallback:", err);
+      }
+    }
     return getProductsByCollection(handle);
   },
 
@@ -34,7 +68,8 @@ export const productService = {
   },
 
   async getRelated(product: Product, limit = 4): Promise<Product[]> {
-    return products
+    const all = await this.getAll();
+    return all
       .filter(
         (p) =>
           p.id !== product.id &&
@@ -46,7 +81,18 @@ export const productService = {
   async search(query: string): Promise<Product[]> {
     const q = query.trim().toLowerCase();
     if (!q) return [];
-    return products.filter(
+
+    if (woocommerceService.isConfigured()) {
+      try {
+        const wcProducts = await woocommerceService.getProducts({ search: query });
+        if (wcProducts.length > 0) return wcProducts;
+      } catch (err) {
+        console.warn("WooCommerce search API failed, using catalog fallback:", err);
+      }
+    }
+
+    const all = await this.getAll();
+    return all.filter(
       (p) =>
         p.title.toLowerCase().includes(q) ||
         p.tags?.some((t) => t.includes(q)) ||
