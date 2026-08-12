@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MessageCircle, Video, X } from "lucide-react";
+import { MessageCircle, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { siteConfig } from "@/config/site";
 
@@ -24,15 +24,6 @@ export default function LiveDemoFab() {
 
   return (
     <>
-      <button
-        type="button"
-        className="live-video-tab"
-        onClick={() => setOpen(true)}
-        aria-label="Live Product Demo"
-      >
-        <Video className="h-5 w-5 md:h-6 md:w-6" />
-      </button>
-
       <button
         type="button"
         className={footerVisible ? "ask-cyber-fab ask-cyber-fab--hidden" : "ask-cyber-fab"}
@@ -82,9 +73,6 @@ export default function LiveDemoFab() {
                 <MessageCircle className="h-4 w-4" />
                 Chat with Our Support Team
               </a>
-              <p className="mt-3 text-center text-xs font-medium text-[#BC0000]">
-                Live Video Shopping
-              </p>
             </motion.div>
           </>
         )}
