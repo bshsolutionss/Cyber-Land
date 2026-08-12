@@ -5,27 +5,11 @@ import type { Product } from "@/types";
 /**
  * WooCommerce REST API Service
  * Handles fetching products, categories, and syncing orders with your WordPress/WooCommerce store.
+ * Supports both Pretty Permalinks (/wp-json/wc/v3) and Plain Permalinks (/index.php?rest_route=/wc/v3).
  */
-const getWcBaseUrl = () => {
-  const baseUrl = env.wordPressUrl.replace(/\/$/, "");
-  return `${baseUrl}/wp-json/wc/v3`;
+const getCleanBaseUrl = () => {
+  return env.wordPressUrl.replace(/\/$/, "");
 };
-
-export const woocommerceClient = axios.create({
-  timeout: 15000,
-});
-
-woocommerceClient.interceptors.request.use((config) => {
-  if (env.wordPressUrl && env.wcConsumerKey && env.wcConsumerSecret) {
-    config.baseURL = getWcBaseUrl();
-    config.params = {
-      ...config.params,
-      consumer_key: env.wcConsumerKey,
-      consumer_secret: env.wcConsumerSecret,
-    };
-  }
-  return config;
-});
 
 export interface WooCommerceRawProduct {
   id: number;
@@ -71,6 +55,62 @@ export function mapWooProductToAppProduct(wcProduct: WooCommerceRawProduct): Pro
   };
 }
 
+async function wcRequest<T = unknown>(
+  method: "GET" | "POST",
+  endpoint: string,
+  dataOrParams?: Record<string, unknown>
+): Promise<T> {
+  const baseUrl = getCleanBaseUrl();
+  const authParams = {
+    consumer_key: env.wcConsumerKey,
+    consumer_secret: env.wcConsumerSecret,
+  };
+
+  // Try Pretty Permalink endpoint first
+  try {
+    const url = `${baseUrl}/wp-json/wc/v3${endpoint}`;
+    if (method === "GET") {
+      const res = await axios.get<T>(url, {
+        params: { ...dataOrParams, ...authParams },
+        timeout: 12000,
+      });
+      return res.data;
+    } else {
+      const res = await axios.post<T>(url, dataOrParams, {
+        params: authParams,
+        timeout: 12000,
+      });
+      return res.data;
+    }
+  } catch (err: unknown) {
+    if (axios.isAxiosError(err) && err.response?.status === 404) {
+      // Fallback for Plain Permalinks via ?rest_route=
+      const fallbackUrl = `${baseUrl}/index.php`;
+      if (method === "GET") {
+        const res = await axios.get<T>(fallbackUrl, {
+          params: {
+            rest_route: `/wc/v3${endpoint}`,
+            ...dataOrParams,
+            ...authParams,
+          },
+          timeout: 12000,
+        });
+        return res.data;
+      } else {
+        const res = await axios.post<T>(fallbackUrl, dataOrParams, {
+          params: {
+            rest_route: `/wc/v3${endpoint}`,
+            ...authParams,
+          },
+          timeout: 12000,
+        });
+        return res.data;
+      }
+    }
+    throw err;
+  }
+}
+
 export const woocommerceService = {
   /**
    * Check if WooCommerce credentials and URL are configured
@@ -91,8 +131,8 @@ export const woocommerceService = {
     if (!this.isConfigured()) {
       throw new Error("WooCommerce URL is not configured yet in .env.local");
     }
-    const response = await woocommerceClient.get<WooCommerceRawProduct[]>("/products", { params });
-    return (response.data || []).map(mapWooProductToAppProduct);
+    const rawList = await wcRequest<WooCommerceRawProduct[]>("GET", "/products", params);
+    return (rawList || []).map(mapWooProductToAppProduct);
   },
 
   /**
@@ -102,8 +142,8 @@ export const woocommerceService = {
     if (!this.isConfigured()) {
       throw new Error("WooCommerce URL is not configured yet in .env.local");
     }
-    const response = await woocommerceClient.get<WooCommerceRawProduct>(`/products/${id}`);
-    return mapWooProductToAppProduct(response.data);
+    const raw = await wcRequest<WooCommerceRawProduct>("GET", `/products/${id}`);
+    return mapWooProductToAppProduct(raw);
   },
 
   /**
@@ -113,8 +153,7 @@ export const woocommerceService = {
     if (!this.isConfigured()) {
       throw new Error("WooCommerce URL is not configured yet in .env.local");
     }
-    const response = await woocommerceClient.get("/products/categories");
-    return response.data;
+    return wcRequest("GET", "/products/categories");
   },
 
   /**
@@ -124,7 +163,6 @@ export const woocommerceService = {
     if (!this.isConfigured()) {
       throw new Error("WooCommerce URL is not configured yet in .env.local");
     }
-    const response = await woocommerceClient.post("/orders", orderData);
-    return response.data;
+    return wcRequest("POST", "/orders", orderData);
   },
 };
