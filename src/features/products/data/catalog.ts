@@ -614,6 +614,9 @@ export function getRelatedProducts(product: Product, limit = 4): Product[] {
     .slice(0, limit);
 }
 
+
+
+
 export const collectionMeta: Record<string, CollectionMeta> = {
   "best-sellers": {
     title: "Bestsellers",
@@ -739,127 +742,7 @@ export const collectionMeta: Record<string, CollectionMeta> = {
 };
 
 /** Resolve products for any collection handle (tag match + smart filters). */
-export function getProductsByCollection(handle: string): Product[] {
-  const h = handle.toLowerCase();
-
-  if (h === "shop-all" || h === "all" || h === "products") {
-    return [...products];
-  }
-
-  // Smart / sale collections
-  if (h === "best-deals-under-1999") {
-    return products.filter((p) => p.price <= 1999);
-  }
-  if (
-    h === "end-of-season-sale" ||
-    h === "payday-sale" ||
-    h === "shark-sale" ||
-    h === "summer-sale" ||
-    h === "shop-best-sale-deals"
-  ) {
-    return products.filter(
-      (p) =>
-        p.compareAtPrice > p.price &&
-        (p.compareAtPrice - p.price) / p.compareAtPrice >= 0.3
-    );
-  }
-  if (h === "freebie-eligible") {
-    return products.filter((p) => p.available);
-  }
-  if (h === "back-in-stock") {
-    return products.filter((p) => p.available && (p.rating ?? 0) >= 4.5);
-  }
-  if (h === "laptops") {
-    return products.filter(
-      (p) => p.collection.includes("laptops") || p.tags?.includes("laptop")
-    );
-  }
-  if (h === "gaming-gear") {
-    return products.filter(
-      (p) =>
-        p.collection.includes("mechanical-keyboards") ||
-        p.collection.includes("gaming-mouse-and-mousepad") ||
-        p.collection.includes("controllers") ||
-        p.collection.includes("laptops") ||
-        p.tags?.includes("keyboard") ||
-        p.tags?.includes("mouse") ||
-        p.tags?.includes("laptop")
-    );
-  }
-  if (h === "mouse-and-mousepads") {
-    return products.filter(
-      (p) =>
-        p.collection.includes("gaming-mouse-and-mousepad") ||
-        p.tags?.includes("mouse")
-    );
-  }
-  if (h === "gaming-controller" || h === "controllers") {
-    return products.filter(
-      (p) =>
-        p.collection.includes("controllers") || p.tags?.includes("controller")
-    );
-  }
-  if (h === "streaming" || h === "streamers-essential") {
-    return products.filter(
-      (p) =>
-        p.collection.includes("audio-video-and-lights") ||
-        p.collection.includes("streamers-essential") ||
-        p.tags?.includes("webcam") ||
-        p.tags?.includes("mic") ||
-        p.tags?.includes("streaming")
-    );
-  }
-  if (h === "accessories") {
-    return products.filter(
-      (p) =>
-        p.tags?.includes("mic") ||
-        p.tags?.includes("webcam") ||
-        p.collection.includes("audio-video-and-lights")
-    );
-  }
-  if (h === "naruto-collab") {
-    return products.filter(
-      (p) =>
-        p.collection.includes("mechanical-keyboards") ||
-        p.title.toLowerCase().includes("swarm") ||
-        p.title.toLowerCase().includes("hive")
-    );
-  }
-  if (h === "pc-builder-starter-kit") {
-    return products.filter(
-      (p) =>
-        p.collection.includes("pc-builder-starter-kit") ||
-        p.collection.includes("mechanical-keyboards") ||
-        p.collection.includes("gaming-mouse-and-mousepad") ||
-        p.collection.includes("monitors") ||
-        p.collection.includes("laptops")
-    );
-  }
-  if (h === "work-from-home-pro") {
-    return products.filter(
-      (p) =>
-        p.collection.includes("work-from-home-pro") ||
-        p.collection.includes("ergo-wfh-chairs") ||
-        p.collection.includes("monitors") ||
-        p.collection.includes("audio-video-and-lights") ||
-        p.collection.includes("laptops")
-    );
-  }
-  if (h === "gamers-essentials") {
-    return products.filter(
-      (p) =>
-        p.collection.includes("gamers-essentials") ||
-        p.collection.includes("mechanical-keyboards") ||
-        p.collection.includes("gaming-mouse-and-mousepad") ||
-        p.collection.includes("monitors") ||
-        p.collection.includes("laptops")
-    );
-  }
-
-  // Direct tag match
-  const tagged = products.filter((p) => p.collection.includes(h));
-  if (tagged.length > 0) return tagged;
-
-  // Fallback empty
+export function getProductsByCollection(_handle: string): Product[] {
+  // Empty array for collection pages until WooCommerce is connected
   return [];
 }
