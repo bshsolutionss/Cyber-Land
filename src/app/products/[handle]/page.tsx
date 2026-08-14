@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import {
-  getProductByHandle,
-  getRelatedProducts,
-  products,
-} from "@/features/products";
+import { products } from "@/features/products";
+import { productService } from "@/services/product.service";
 import ProductDetail from "@/features/products/components/ProductDetail";
 import ProductSection from "@/components/sections/ProductSection";
 
@@ -16,7 +13,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { handle } = await params;
-  const product = getProductByHandle(handle);
+  const product = await productService.getByHandle(handle);
   if (!product) return { title: "Product not found" };
   return {
     title: product.title,
@@ -31,10 +28,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { handle } = await params;
-  const product = getProductByHandle(handle);
+  const product = await productService.getByHandle(handle);
   if (!product) notFound();
 
-  const related = getRelatedProducts(product, 5);
+  const related = await productService.getRelated(product, 5);
 
   return (
     <>

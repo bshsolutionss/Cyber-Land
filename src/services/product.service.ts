@@ -51,8 +51,21 @@ export const productService = {
   async getByCollection(handle: string): Promise<Product[]> {
     if (woocommerceService.isConfigured()) {
       try {
-        const wcProducts = await woocommerceService.getProducts({ category: handle });
-        if (wcProducts.length > 0) return wcProducts;
+        const allWc = await woocommerceService.getProducts();
+        if (allWc.length > 0) {
+          const h = handle.toLowerCase();
+          if (h === "all" || h === "shop-all" || h === "products") {
+            return allWc;
+          }
+          const matched = allWc.filter(
+            (p) =>
+              p.collection.some((c) => c.toLowerCase() === h) ||
+              p.tags?.some((t) => t.toLowerCase() === h) ||
+              p.handle.toLowerCase().includes(h) ||
+              p.title.toLowerCase().includes(h)
+          );
+          return matched;
+        }
       } catch (err) {
         console.warn("WooCommerce API getByCollection failed, using catalog fallback:", err);
       }
