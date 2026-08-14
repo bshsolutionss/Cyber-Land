@@ -32,7 +32,7 @@ export interface WooCommerceRawProduct {
 
 export function mapWooProductToAppProduct(wcProduct: WooCommerceRawProduct): Product {
   const imageList = (wcProduct.images || []).map((img) => img.src);
-  const primaryImg = imageList[0] || "/images/placeholder.jpg";
+  const primaryImg = imageList[0] || "/images/mock-laptop.jpg";
   const hoverImg = imageList[1] || primaryImg;
 
   return {
