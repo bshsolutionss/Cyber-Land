@@ -651,6 +651,15 @@ export const collectionMeta: Record<string, CollectionMeta> = {
     description:
       "Gaming, creator, and everyday laptops engineered for performance.",
   },
+  "new-laptops": {
+    title: "New Laptops",
+    description: "Brand new gaming, creator, and performance laptops.",
+  },
+  "used-laptops": {
+    title: "Used Laptops",
+    description:
+      "Certified pre-owned and refurbished laptops tested for peak performance.",
+  },
   "new-launches": {
     title: "New Launches",
     description: "The latest from Cyber Land.",

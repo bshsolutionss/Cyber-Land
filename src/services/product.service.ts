@@ -57,13 +57,50 @@ export const productService = {
           if (h === "all" || h === "shop-all" || h === "products") {
             return allWc;
           }
-          const matched = allWc.filter(
-            (p) =>
-              p.collection.some((c) => c.toLowerCase() === h) ||
-              p.tags?.some((t) => t.toLowerCase() === h) ||
+          const matched = allWc.filter((p) => {
+            const cols = p.collection.map((c) => c.toLowerCase());
+            const tags = (p.tags || []).map((t) => t.toLowerCase());
+            const titleLower = p.title.toLowerCase();
+
+            if (h === "new-laptops") {
+              return (
+                cols.includes("new-laptops") ||
+                cols.includes("new laptops") ||
+                tags.includes("new") ||
+                tags.includes("new-laptops") ||
+                titleLower.includes("new laptop") ||
+                (cols.includes("laptops") && !cols.includes("used-laptops") && !tags.includes("used"))
+              );
+            }
+
+            if (h === "used-laptops") {
+              return (
+                cols.includes("used-laptops") ||
+                cols.includes("used laptops") ||
+                tags.includes("used") ||
+                tags.includes("used-laptops") ||
+                tags.includes("refurbished") ||
+                titleLower.includes("used") ||
+                titleLower.includes("refurbished")
+              );
+            }
+
+            if (h === "laptops") {
+              return (
+                cols.includes("laptops") ||
+                cols.includes("new-laptops") ||
+                cols.includes("used-laptops") ||
+                titleLower.includes("laptop")
+              );
+            }
+
+            return (
+              cols.some((c) => c === h) ||
+              tags.some((t) => t === h) ||
               p.handle.toLowerCase().includes(h) ||
-              p.title.toLowerCase().includes(h)
-          );
+              titleLower.includes(h)
+            );
+          });
           return matched;
         }
       } catch (err) {
