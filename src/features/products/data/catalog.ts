@@ -660,6 +660,18 @@ export const collectionMeta: Record<string, CollectionMeta> = {
     description:
       "Certified pre-owned and refurbished laptops tested for peak performance.",
   },
+  cpu: {
+    title: "CPU & Processors",
+    description: "High-performance gaming and desktop processors.",
+  },
+  "new-cpu": {
+    title: "New CPU",
+    description: "Brand new boxed processors for gaming and workstations.",
+  },
+  "used-cpu": {
+    title: "Used CPU",
+    description: "Tested and certified pre-owned processors.",
+  },
   "new-launches": {
     title: "New Launches",
     description: "The latest from Cyber Land.",

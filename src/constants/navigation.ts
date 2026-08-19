@@ -48,6 +48,14 @@ export const mainNav: NavItem[] = [
       { label: "Used Laptops", href: "/collections/used-laptops" },
     ],
   },
+  {
+    label: "CPU",
+    href: "/collections/cpu",
+    children: [
+      { label: "New CPU", href: "/collections/new-cpu" },
+      { label: "Used CPU", href: "/collections/used-cpu" },
+    ],
+  },
   { label: "Monitor", href: "/collections/monitors" },
   /* { label: "Ergo Chairs", href: "/collections/ergo-wfh-chairs" }, */
   { label: "Keyboards", href: "/collections/mechanical-keyboards" },

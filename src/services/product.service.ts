@@ -94,6 +94,40 @@ export const productService = {
               );
             }
 
+            if (h === "new-cpu") {
+              return (
+                cols.includes("new-cpu") ||
+                cols.includes("new cpu") ||
+                (cols.includes("cpu") && (tags.includes("new") || !cols.includes("used-cpu"))) ||
+                titleLower.includes("new cpu") ||
+                titleLower.includes("new processor")
+              );
+            }
+
+            if (h === "used-cpu") {
+              return (
+                cols.includes("used-cpu") ||
+                cols.includes("used cpu") ||
+                (cols.includes("cpu") && (tags.includes("used") || tags.includes("refurbished"))) ||
+                titleLower.includes("used cpu") ||
+                titleLower.includes("used processor")
+              );
+            }
+
+            if (h === "cpu" || h === "cpus" || h === "processors") {
+              return (
+                cols.includes("cpu") ||
+                cols.includes("cpus") ||
+                cols.includes("new-cpu") ||
+                cols.includes("used-cpu") ||
+                cols.includes("processors") ||
+                titleLower.includes("processor") ||
+                titleLower.includes("cpu") ||
+                titleLower.includes("intel core") ||
+                titleLower.includes("ryzen")
+              );
+            }
+
             return (
               cols.some((c) => c === h) ||
               tags.some((t) => t === h) ||
