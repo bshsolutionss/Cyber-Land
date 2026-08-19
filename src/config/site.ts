@@ -9,7 +9,7 @@ export const siteConfig = {
       ? `https://${process.env.VERCEL_URL}`
       : "http://localhost:3000"),
   support: {
-    email: "help@cyberland.com",
+    email: "help@cyberland.pk",
     phone: "+92 345 8006009",
     phoneHref: "tel:+923458006009",
     whatsapp: "https://wa.me/923458006009",

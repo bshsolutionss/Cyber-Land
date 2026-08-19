@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Jost } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import AppProviders from "@/components/providers/AppProviders";
 import SiteShell from "@/components/layout/SiteShell";
 import { siteConfig } from "@/config/site";
@@ -102,6 +104,8 @@ export default function RootLayout({
         <AppProviders>
           <SiteShell>{children}</SiteShell>
         </AppProviders>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
