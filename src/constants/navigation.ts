@@ -46,7 +46,6 @@ export const mainNav: NavItem[] = [
     children: [
       { label: "New Laptops", href: "/collections/new-laptops" },
       { label: "Used Laptops", href: "/collections/used-laptops" },
-      { label: "All Laptops", href: "/collections/laptops" },
     ],
   },
   { label: "Monitor", href: "/collections/monitors" },
