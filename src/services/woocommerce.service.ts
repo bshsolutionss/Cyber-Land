@@ -48,7 +48,10 @@ export function mapWooProductToAppProduct(wcProduct: WooCommerceRawProduct): Pro
     reviewCount: Number(wcProduct.rating_count || 0),
     available: wcProduct.stock_status === "instock",
     hasVariants: Boolean(wcProduct.variations?.length),
-    collection: (wcProduct.categories || []).map((c) => c.slug),
+    collection: (wcProduct.categories || []).flatMap((c) => [
+      c.slug.toLowerCase(),
+      c.name.toLowerCase(),
+    ]),
     description: wcProduct.short_description || wcProduct.description || "",
     tags: (wcProduct.tags || []).map((t) => t.slug),
     badge: wcProduct.on_sale ? "Sale" : undefined,

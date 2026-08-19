@@ -5,6 +5,9 @@ import { productService } from "@/services/product.service";
 import ProductDetail from "@/features/products/components/ProductDetail";
 import ProductSection from "@/components/sections/ProductSection";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type Props = { params: Promise<{ handle: string }> };
 
 export async function generateStaticParams() {

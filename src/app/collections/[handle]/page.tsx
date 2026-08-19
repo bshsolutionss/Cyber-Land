@@ -3,6 +3,9 @@ import { collectionMeta } from "@/features/products";
 import { productService } from "@/services/product.service";
 import CollectionView from "@/features/collections/components/CollectionView";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type Props = { params: Promise<{ handle: string }> };
 
 export async function generateStaticParams() {
